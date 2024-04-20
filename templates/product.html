@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <style>
+            body{
+                background-image: url("{{url_for('static',filename = 'goods.png')}}");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+            }
+            h1{
+                text-align:center;
+            }
+            form{
+                padding-left: 440px;
+            }
+            .container label{
+                padding-left: 140px;
+                font-size: 25px;
+            }
+            .container select{
+                width: 465px;
+                height: 35px;
+                border: 2px solid red;
+                border-radius: 5px;
+            }
+            .pred{
+                padding-left: 440px;
+
+            }
+            .pred h2{
+                color: ;
+            }
+            .pred ul li{
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>PERSONALIZED PRODUCT RECOMMENDATION SYSTEM</h1>
+        <form action="recco" method = 'POST'>
+            <div class="container">
+                <label for="prod">Select product...</label><br>
+                <select name="prod" id="prod">
+                    {% for name in prod_names%}
+                        <option value="{{name}}">{{ name }}</option>
+                    {% endfor%}
+                </select>
+            </div><br>
+            <div class="btn">
+                <button type= submit>Show recommendations...</button>
+            </div>
+        </form>
+        {% if reccos %}
+        <div class="pred">
+            <h2>Recommended products for {{ prod_title }};</h2>
+            <ul>
+                {% for recco in reccos%}
+                    <li>{{ recco }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </body>
+</html>
